@@ -44,6 +44,13 @@ let puffs = {
     }
 }
 
+// listen for start button click
+$( "#startButton" ).click(function() {
+    
+    
+    
+  });
+
 // name generator - returns random name
 function genName() {
     let first  = ["Doom ", "Fire ", "Merciless ", "Thunderous ", "Wicked ", "Epic ", "Evil ", "Nuclear ",

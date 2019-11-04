@@ -40,7 +40,7 @@ h3 {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.h2pill {
+.h2banner {
     background: rgb(55, 55, 55, 0.8);
     padding: 10px;
     filter: drop-shadow(0 0 0.75rem black);
@@ -97,4 +97,26 @@ h3 {
     font-family: Arial, Helvetica, sans-serif;
     float: right;
     line-height: 150%;
+}
+
+.hidden {
+    display: none;
+}
+
+.startButton {
+    position: absolute;
+    top: 150px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.throb {
+    animation-name: throb;
+    animation-duration: 0.8s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes throb {
+    from {opacity: 60%;}
+    to   {opacity: 100%; }
 }
