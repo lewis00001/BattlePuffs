@@ -46,9 +46,18 @@ let puffs = {
 
 // listen for start button click
 $( "#startButton" ).click(function() {
-    
-    
-    
+    // play eClick sound
+    $( "audio#eClick" )[0].play();
+    // hide startButton
+    $( "#startButton" ).addClass( "hidden" );
+    // unhide destroyerSelection
+    $( "#destroyerSelection" ).removeClass( "hidden" );
+  });
+
+// listen for card click
+$( ".d_img" ).click(function() {
+    // play feefer sound
+    $( "audio#feefer" )[0].play();
   });
 
 // name generator - returns random name

@@ -16,6 +16,14 @@
 </head>
 
 <body>
+    <!--- setup audio files -->
+    <audio preload="auto" id="eClick">
+        <source src="assets/sound/eClick.mp3" type="audio/mp3">
+    </audio>
+    <audio preload="auto" id="feefer">
+        <source src="assets/sound/feefer.mp3" type="audio/mp3">
+    </audio>
+
     <header>
         <div class="flexbox">
             <img src="assets/images/puffy_4.png" class="header-puffs" alt="puffy-1 image">
@@ -35,7 +43,9 @@
 
         <!--- choose destroyer -->
         <div class="hidden" id="destroyerSelection">
-            <h2 class="h2banner">Select Your Destroyer</h2>
+            <h2 class="h2banner">
+                <div class="throb">Select Your Destroyer</div>
+            </h2>
             <div class="flexbox cardHolder">
                 <div class="card">
                     <h3 id="card_1"></h3>
