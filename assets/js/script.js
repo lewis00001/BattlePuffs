@@ -11,7 +11,7 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='d_img feefer' id='ci_1' src='assets/images/puffy_1.png'>"]
+            image: ["<img class='d_img feefer puff' id='ci_1' src='assets/images/puffy_1.png'>"]
         },
         p2: {
             name: null,
@@ -21,7 +21,7 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='d_img feefer' id='ci_2' src='assets/images/puffy_2.png'>"]
+            image: ["<img class='d_img feefer puff' id='ci_2' src='assets/images/puffy_2.png'>"]
         },
         p3: {
             name: null,
@@ -31,7 +31,7 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='d_img feefer' id='ci_3' src='assets/images/puffy_3.png'>"]
+            image: ["<img class='d_img feefer puff' id='ci_3' src='assets/images/puffy_3.png'>"]
         },
         p4: {
             name: null,
@@ -41,7 +41,7 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='d_img feefer' id='ci_4' src='assets/images/puffy_4.png'>"]
+            image: ["<img class='d_img feefer puff' id='ci_4' src='assets/images/puffy_4.png'>"]
         }
     }
 
@@ -156,7 +156,20 @@ $(document).ready(function () {
         $("#destroyerSelection").addClass("hidden");
         // unhide battleScreen
         $("#battleScreen").removeClass("hidden");
-        
+
+        // find & output selected puff
+        let a = [puffs.p1, puffs.p2, puffs.p3, puffs.p4];
+        for (let i = 0; i < 4; i++) {
+            if ( a[i].selected === true ) {
+                $("#pSelected").html(a[i].image);
+                $(".puff").removeClass("d_img feefer");
+                $(".puffInfo").html(
+                    "<p>" + a[i].name + "</p><br><hr>" +
+                    "<p>HP:</p><span class='statSpan'>" + a[i].healthPoints + "</span><br><br>" + 
+                    "<p>AP:</p><span class='statSpan'>" + a[i].attackPower + "</span>"
+                );
+            }
+        }
     }
 
 });

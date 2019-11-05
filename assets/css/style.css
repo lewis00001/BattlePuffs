@@ -88,8 +88,11 @@ h3 {
     border: 1px solid #444;
 }
 
-.d_img {
+.puff {
     width: 160px;
+}
+
+.d_img {
     margin: 10px 0 10px 0;
     opacity: 85%;
     cursor: pointer;
@@ -126,4 +129,23 @@ h3 {
 @keyframes throb {
     from {opacity: 60%;}
     to   {opacity: 100%; }
+}
+
+.puffSelected {
+    position: absolute;
+    min-width: 100px;
+    min-height: 100px;
+    top: 65%;
+    right: 60%;
+}
+
+.battleD_stats {
+    background: rgb(55, 55, 55, 0.8);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 12px;
+}
+
+#pSelected {
+    opacity: 100%;
 }
