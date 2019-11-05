@@ -57,6 +57,7 @@ h3 {
 
 .cardImage {
     width: 180px;
+    margin: auto;
 }
 
 .content {
@@ -76,14 +77,15 @@ h3 {
 .header-puffs {
     margin: 15px 10px 15px 10px;
     width: 40px;
-    filter: drop-shadow(0 0 0.8rem black);
+    filter: drop-shadow(0 0 0.85rem black);
 }
 
 .card {
     margin: 15px 5px 0 5px;
     background: rgb(55, 55, 55, 0.7);
-    filter: drop-shadow(0 0 0.8rem black);
+    filter: drop-shadow(0 0 0.85rem black);
     padding: 10px;
+    border: 1px solid #444;
 }
 
 .d_img {

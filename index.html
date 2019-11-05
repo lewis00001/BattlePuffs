@@ -6,10 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Battle Puffs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" 
-        href="assets/images/favicon/favicon-16x16.png">
-    <link href="https://fonts.googleapis.com/css?family=Ultra&display=swap" 
-        rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/images/favicon/favicon-16x16.png">
+    <link href="https://fonts.googleapis.com/css?family=Ultra&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Economica&display=swap" rel="stylesheet">
@@ -23,25 +21,28 @@
     <audio preload="auto" id="feefer">
         <source src="assets/sound/feefer.mp3" type="audio/mp3">
     </audio>
+    <audio preload="auto" id="smack">
+        <source src="assets/sound/smack.mp3" type="audio/mp3">
+    </audio>
 
     <header>
         <div class="flexbox">
             <img src="assets/images/puffy_4.png" class="header-puffs" alt="puffy-1 image">
-            <img src="assets/images/puffy_3.png" class="header-puffs"  alt="puffy-1 image">
+            <img src="assets/images/puffy_3.png" class="header-puffs" alt="puffy-1 image">
             <h1>Rough'n Tough Battle Puff</h1>
-            <img src="assets/images/puffy_2.png" class="header-puffs"  alt="puffy-1 image">
-            <img src="assets/images/puffy_1.png" class="header-puffs"  alt="puffy-1 image">
+            <img src="assets/images/puffy_2.png" class="header-puffs" alt="puffy-1 image">
+            <img src="assets/images/puffy_1.png" class="header-puffs" alt="puffy-1 image">
         </div>
     </header>
 
     <div class="bg content">
 
-        <!--- start button -->
+        <!--- start button (screen 1) -->
         <h2 class="startButton h2banner" id="startButton">
             <div class="throb">Click to Begin</div>
         </h2>
 
-        <!--- choose destroyer -->
+        <!--- choose destroyer (screen 2) -->
         <div class="hidden" id="destroyerSelection">
             <h2 class="h2banner">
                 <div class="throb">Select Your Destroyer</div>
@@ -51,9 +52,7 @@
                     <h3 id="card_1"></h3>
                     <hr>
                     <div>
-                        <div class="cardImage">
-                            <img class='d_img' src='assets/images/puffy_1.png'>
-                        </div>
+                        <div class="cardImage" id="cardImg_1"></div>
                         <div class="d_stats" id="statsCard_1"></div>
                     </div>
                 </div>
@@ -61,9 +60,7 @@
                     <h3 id="card_2"></h3>
                     <hr>
                     <div>
-                        <div class="cardImage">
-                            <img class='d_img' src='assets/images/puffy_2.png'>
-                        </div>
+                        <div class="cardImage" id="cardImg_2"></div>
                         <div class="d_stats" id="statsCard_2"></div>
                     </div>
                 </div>
@@ -71,9 +68,7 @@
                     <h3 id="card_3"></h3>
                     <hr>
                     <div>
-                        <div class="cardImage">
-                            <img class='d_img' src='assets/images/puffy_3.png'>
-                        </div>
+                        <div class="cardImage" id="cardImg_3"></div>
                         <div class="d_stats" id="statsCard_3"></div>
                     </div>
                 </div>
@@ -81,14 +76,26 @@
                     <h3 id="card_4"></h3>
                     <hr>
                     <div>
-                        <div class="cardImage">
-                            <img class='d_img' src='assets/images/puffy_4.png'>
-                        </div>
+                        <div class="cardImage" id="cardImg_4"></div>
                         <div class="d_stats" id="statsCard_4"></div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--- battle setup (screen 3) -->
+        <div class="hidden" id="battleScreen">
+            <h2 class="h2banner">
+                <div class="throb">BATTLE SCREEN</div>
+            </h2>
+            
+            <div >
+
+            </div>
+
+        </div>
+
+
     </div>
 
     <footer>
