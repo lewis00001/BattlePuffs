@@ -170,6 +170,7 @@ $(document).ready(function () {
                 );
             }
         }
+        // find and output enemy puffs
         for (let i = 0; i < 4; i++) {
             if ( a[i].selected === false ) {
                 $(".pos_1").append(
