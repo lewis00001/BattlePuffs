@@ -1,4 +1,3 @@
-// selects and displays random background image for the .content section
 $(document).ready(function () {
 
     // puff objects
@@ -11,7 +10,7 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='d_img feefer puff' id='ci_1' src='assets/images/puffy_1.png'>"]
+            image: ["<img class='puff' id='ci_1' src='assets/images/puffy_1.png'>"]
         },
         p2: {
             name: null,
@@ -21,7 +20,7 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='d_img feefer puff' id='ci_2' src='assets/images/puffy_2.png'>"]
+            image: ["<img class='puff' id='ci_2' src='assets/images/puffy_2.png'>"]
         },
         p3: {
             name: null,
@@ -31,7 +30,7 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='d_img feefer puff' id='ci_3' src='assets/images/puffy_3.png'>"]
+            image: ["<img class='puff' id='ci_3' src='assets/images/puffy_3.png'>"]
         },
         p4: {
             name: null,
@@ -41,19 +40,23 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='d_img feefer puff' id='ci_4' src='assets/images/puffy_4.png'>"]
+            image: ["<img class='puff' id='ci_4' src='assets/images/puffy_4.png'>"]
         }
     }
 
+    // used with battle screen
+    let activeEnemyWasDestroyed = true;
+
+    // selects and displays random background image for the .content section
     var images = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg'];
     $('.bg').css({
         'background-image': 'url(\"assets/images/' +
             images[Math.floor(Math.random() * images.length)] + '\")'
     });
 
-    // assigns names and stats to all puffs
-    loadStats();
-    displayDestroyerSelections();
+    //********************************************************************//
+    // start button (screen 1)
+    //********************************************************************//
 
     // listen for start button click
     $("#startButton").click(function () {
@@ -64,6 +67,14 @@ $(document).ready(function () {
         // unhide destroyerSelection
         $("#destroyerSelection").removeClass("hidden");
     });
+
+    //********************************************************************//
+    // destroyer selection (screen 2)
+    //********************************************************************//
+
+    // assigns names and stats to all puffs
+    loadStats();
+    displayDestroyerSelections();
 
     // name generator - returns random name
     function genName() {
@@ -122,14 +133,16 @@ $(document).ready(function () {
             );
         }
 
+        $(".puff").addClass("d_img feefer puffSize_1");
+
         //listen for card click
         $(".feefer").click(function () {
             // play feefer sound
             $("audio#feefer")[0].play();
-        }); 
+        });
     }
 
-    // updates puff object with selection 
+    // updates puff object with selection from destroyerSelection screen
     $(".d_img").click(function () {
         var id = $(this).attr('id');
         switch (id) {
@@ -146,10 +159,13 @@ $(document).ready(function () {
                 puffs.p4.selected = true;
                 break;
         }
-
         // sets up the battle screen 
         battleScreen();
     });
+
+    //********************************************************************//
+    // battle screen (screen 3)
+    //********************************************************************//
 
     function battleScreen() {
         // hide destroyerSelection screen
@@ -160,38 +176,80 @@ $(document).ready(function () {
         let a = [puffs.p1, puffs.p2, puffs.p3, puffs.p4];
         // find & output selected puff
         for (let i = 0; i < 4; i++) {
-            if ( a[i].selected === true ) {
+            if (a[i].selected === true) {
                 $("#pSelected").html(a[i].image);
                 $(".puff").removeClass("d_img feefer");
                 $(".puffInfo").html(
                     "<p>" + a[i].name + "</p><br><hr>" +
-                    "<p>HP:</p><span class='statSpan'>" + a[i].healthPoints + "</span><br><br>" + 
+                    "<p>HP:</p><span class='statSpan'>" + a[i].healthPoints + "</span><br><br>" +
                     "<p>AP:</p><span class='statSpan'>" + a[i].attackPower + "</span>"
                 );
             }
         }
-        // find and output enemy puffs
+        // find & output enemy puffs
         for (let i = 0; i < 4; i++) {
-            if ( a[i].selected === false ) {
+            if (a[i].selected === false) {
                 $(".pos_1").append(
-                    "<div class='enemyPuff ePosition_1 flexbox'>" + 
-                        "<div class='battleCardImage'>" + a[i].image + "</div>" + 
-                        "<div class='battleD_stats'>" +
-                            "<p class='statSmall'>" + a[i].name + "</p><br><hr>" +
-                            "<p class='statSmall'>HP:</p><span class='statSpan statSmall'>" + 
-                                a[i].healthPoints + "</span><br><br>" + 
-                            "<p class='statSmall'>AP:</p><span class='statSpan statSmall'>" + 
-                                a[i].counterAttack + "</span>" +
-                        "</div>" +
+                    "<div class='enemyPuff ePosition_1 flexbox'>" +
+                    "<div class='battleCardImage'>" + a[i].image + "</div>" +
+                    "<div class='battleD_stats'>" +
+                    "<p class='statSmall'>" + a[i].name + "</p><br><hr>" +
+                    "<p class='statSmall'>HP:</p><span class='statSpan statSmall'>" +
+                    a[i].healthPoints + "</span><br><br>" +
+                    "<p class='statSmall'>AP:</p><span class='statSpan statSmall'>" +
+                    a[i].counterAttack + "</span>" +
+                    "</div>" +
                     "</div>"
                 );
-                $(".puff").removeClass("d_img feefer");
             }
         }
-        // ///<div class="enemyPuff ePosition_1">
-        // ///<div class="battleCardImage" id="enemy_1"></div>
-        // ///<div class="e_battleD_stats"></div>
-        // ///</div>
+        $(".puff").addClass("puffSize_2 d_img_2");
+        $(".puff").removeClass("feefer");
+
+        // updates puff object with selection from ePosition_1 (enemy)
+        $(".d_img_2").click(function () {
+            if (activeEnemyWasDestroyed === true) {
+                var id = $(this).attr('id');
+                switch (id) {
+                    case 'ci_1':
+                        if (puffs.p1.selected === false) {
+                            puffs.p1.activeEnemy = true;
+                            becomeActiveEnemy();
+                            console.log( puffs );
+                        }
+                        break;
+                    case 'ci_2':
+                        if (puffs.p2.selected === false) {
+                            puffs.p2.activeEnemy = true;
+                            becomeActiveEnemy();
+                            console.log( puffs );
+                        }
+                        break;
+                    case 'ci_3':
+                        if (puffs.p3.selected === false) {
+                            puffs.p3.activeEnemy = true;
+                            becomeActiveEnemy();
+                            console.log( puffs );
+                        }
+                        break;
+                    case 'ci_4':
+                        if (puffs.p4.selected === false) {
+                            puffs.p4.activeEnemy = true;
+                            becomeActiveEnemy();
+                            console.log( puffs );
+                        }
+                        break;
+                }
+            }
+        });
     }
 
+    // moves selected enemy into position 
+    function becomeActiveEnemy() {
+        activeEnemyWasDestroyed = false;
+        console.log("active enemy clicked");
+    }
+
+
+    // end //
 });
