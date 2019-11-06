@@ -157,8 +157,8 @@ $(document).ready(function () {
         // unhide battleScreen
         $("#battleScreen").removeClass("hidden");
 
-        // find & output selected puff
         let a = [puffs.p1, puffs.p2, puffs.p3, puffs.p4];
+        // find & output selected puff
         for (let i = 0; i < 4; i++) {
             if ( a[i].selected === true ) {
                 $("#pSelected").html(a[i].image);
@@ -170,6 +170,27 @@ $(document).ready(function () {
                 );
             }
         }
+        for (let i = 0; i < 4; i++) {
+            if ( a[i].selected === false ) {
+                $(".pos_1").append(
+                    "<div class='enemyPuff ePosition_1 flexbox'>" + 
+                        "<div class='battleCardImage'>" + a[i].image + "</div>" + 
+                        "<div class='battleD_stats'>" +
+                            "<p class='statSmall'>" + a[i].name + "</p><br><hr>" +
+                            "<p class='statSmall'>HP:</p><span class='statSpan statSmall'>" + 
+                                a[i].healthPoints + "</span><br><br>" + 
+                            "<p class='statSmall'>AP:</p><span class='statSpan statSmall'>" + 
+                                a[i].counterAttack + "</span>" +
+                        "</div>" +
+                    "</div>"
+                );
+                $(".puff").removeClass("d_img feefer");
+            }
+        }
+        // ///<div class="enemyPuff ePosition_1">
+        // ///<div class="battleCardImage" id="enemy_1"></div>
+        // ///<div class="e_battleD_stats"></div>
+        // ///</div>
     }
 
 });
