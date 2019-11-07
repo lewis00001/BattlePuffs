@@ -59,6 +59,7 @@ h3 {
 
 .cardImage {
     width: 180px;
+    height: 168px;
     margin: auto;
 }
 
@@ -153,9 +154,42 @@ h3 {
     from {
         opacity: 60%;
     }
-
     to {
         opacity: 100%;
+    }
+}
+
+.breath_1 {
+    animation-name: breath;
+    animation-duration: 1.6s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+.breath_2 {
+    animation-name: breath;
+    animation-duration: 1.8s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+.breath_3 {
+    animation-name: breath;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+.breath_4 {
+    animation-name: breath;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes breath {
+    from {
+        width: 156px;
+    }
+    to {
+        width: 160px;
     }
 }
 
@@ -164,10 +198,17 @@ h3 {
     min-width: 100px;
     min-height: 100px;
     top: 65%;
-    right: 60%;
+    right: 55%;
 }
 
 .battleD_stats {
+    background: rgb(55, 55, 55, 0.8);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 12px;
+}
+
+.e_battleD_stats {
     background: rgb(55, 55, 55, 0.8);
     padding: 10px;
     margin: 10px;
@@ -178,8 +219,108 @@ h3 {
     margin-top: 18px;
 }
 
+.ePosition_2 {
+    position: absolute;
+    display: flex;
+    top: 65%;
+    left: 55%;
+}
+
+.attackLeft {
+    animation-name: attackLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+}
+@keyframes attackLeft {
+    0% {
+        top: 65%;
+    }
+    20% {
+        top: 60%;
+    }
+    40% {
+        top: 65%;
+    }
+    60% {
+        top: 60%;
+    }
+    80% {
+        top: 65%;
+    }
+    85% {
+        left: 55%;
+    }
+    90% {
+        left: 48%;
+    }
+    95% {
+        left: 55%;
+    }
+    100% {
+        left: 55%;
+    }
+}
+
+.attackRight {
+    animation-name: attackRight;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+}
+@keyframes attackRight {
+    0% {
+        top: 65%;
+    }
+    20% {
+        top: 60%;
+    }
+    40% {
+        top: 65%;
+    }
+    60% {
+        top: 60%;
+    }
+    80% {
+        top: 65%;
+    }
+    85% {
+        right: 55%;
+    }
+    90% {
+        right: 48%;
+    }
+    95% {
+        right: 55%;
+    }
+    100% {
+        right: 55%;
+    }
+}
+
 #pSelected > img {
     opacity: 1;
     width: 170px;
     cursor: auto;
 }
+
+#activeEnemy > img {
+    opacity: 1;
+    width: 170px;
+    cursor: auto;
+}
+
+#doBattleButton {
+    position: absolute;
+    top: 40%;
+    display: flex;
+    color: white;
+    align-items: center;
+    background: rgb(55, 55, 55, 1);
+    padding: 16px 20px 18px 20px;
+    border-radius: 6px;
+    border: 2px solid white;
+    font-size: 28px;
+    letter-spacing: 1.5px;
+    filter: drop-shadow(0 0 0.85rem black);
+    cursor: pointer;
+}
+

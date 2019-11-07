@@ -3,6 +3,7 @@ $(document).ready(function () {
     // puff objects
     let puffs = {
         p1: {
+            id: "id_1",
             name: null,
             healthPoints: null,
             attackPower: null,
@@ -10,9 +11,10 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='puff' id='ci_1' src='assets/images/puffy_1.png'>"]
+            image: ["<img class='puff breath_1' id='ci_1' src='assets/images/puffy_1.png'>"]
         },
         p2: {
+            id: "id_2",
             name: null,
             healthPoints: null,
             attackPower: null,
@@ -20,9 +22,10 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='puff' id='ci_2' src='assets/images/puffy_2.png'>"]
+            image: ["<img class='puff breath_2' id='ci_2' src='assets/images/puffy_2.png'>"]
         },
         p3: {
+            id: "id_3",
             name: null,
             healthPoints: null,
             attackPower: null,
@@ -30,9 +33,10 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='puff' id='ci_3' src='assets/images/puffy_3.png'>"]
+            image: ["<img class='puff breath_3' id='ci_3' src='assets/images/puffy_3.png'>"]
         },
         p4: {
+            id: "id_4",
             name: null,
             healthPoints: null,
             attackPower: null,
@@ -40,7 +44,7 @@ $(document).ready(function () {
             selected: false,
             activeEnemy: false,
             wasDestroyed: false,
-            image: ["<img class='puff' id='ci_4' src='assets/images/puffy_4.png'>"]
+            image: ["<img class='puff breath_4' id='ci_4' src='assets/images/puffy_4.png'>"]
         }
     }
 
@@ -190,7 +194,7 @@ $(document).ready(function () {
         for (let i = 0; i < 4; i++) {
             if (a[i].selected === false) {
                 $(".pos_1").append(
-                    "<div class='enemyPuff ePosition_1 flexbox'>" +
+                    "<div class='enemyPuff ePosition_1 flexbox' id='" + a[i].id + "'>" +
                     "<div class='battleCardImage'>" + a[i].image + "</div>" +
                     "<div class='battleD_stats'>" +
                     "<p class='statSmall'>" + a[i].name + "</p><br><hr>" +
@@ -201,10 +205,11 @@ $(document).ready(function () {
                     "</div>" +
                     "</div>"
                 );
+                $(".puff").addClass("puffSize_2 d_img_2");
+                $(".puff").removeClass("feefer breath_1 breath_2 breath_3 breath_4");
             }
         }
-        $(".puff").addClass("puffSize_2 d_img_2");
-        $(".puff").removeClass("feefer");
+
 
         // updates puff object with selection from ePosition_1 (enemy)
         $(".d_img_2").click(function () {
@@ -214,29 +219,37 @@ $(document).ready(function () {
                     case 'ci_1':
                         if (puffs.p1.selected === false) {
                             puffs.p1.activeEnemy = true;
+                            $("#id_1").addClass("hidden");
+                            // play feefer sound
+                            $("audio#feefer")[0].play();
                             becomeActiveEnemy();
-                            console.log( puffs );
                         }
                         break;
                     case 'ci_2':
                         if (puffs.p2.selected === false) {
                             puffs.p2.activeEnemy = true;
+                            $("#id_2").addClass("hidden");
+                            // play feefer sound
+                            $("audio#feefer")[0].play();
                             becomeActiveEnemy();
-                            console.log( puffs );
                         }
                         break;
                     case 'ci_3':
                         if (puffs.p3.selected === false) {
                             puffs.p3.activeEnemy = true;
+                            $("#id_3").addClass("hidden");
+                            // play feefer sound
+                            $("audio#feefer")[0].play();
                             becomeActiveEnemy();
-                            console.log( puffs );
                         }
                         break;
                     case 'ci_4':
                         if (puffs.p4.selected === false) {
                             puffs.p4.activeEnemy = true;
+                            $("#id_4").addClass("hidden");
+                            // play feefer sound
+                            $("audio#feefer")[0].play();
                             becomeActiveEnemy();
-                            console.log( puffs );
                         }
                         break;
                 }
@@ -247,9 +260,37 @@ $(document).ready(function () {
     // moves selected enemy into position 
     function becomeActiveEnemy() {
         activeEnemyWasDestroyed = false;
-        console.log("active enemy clicked");
+        $("#chooseOpponetBanner").addClass("hidden");
+
+        let a = [puffs.p1, puffs.p2, puffs.p3, puffs.p4];
+        // find & output selected enemy puff
+        for (let i = 0; i < 4; i++) {
+            if (a[i].activeEnemy === true && a[i].wasDestroyed === false) {
+                $("#activeEnemy").html(a[i].image);
+                $(".e_battleD_stats").html(
+                    "<p>" + a[i].name + "</p><br><hr>" +
+                    "<p>HP:</p><span class='statSpan'>" + a[i].healthPoints + "</span><br><br>" +
+                    "<p>AP:</p><span class='statSpan'>" + a[i].counterAttack + "</span>"
+                );
+                $(".puff").addClass("d_img_2");
+                $(".puff").removeClass("breath_1 breath_2 breath_3 breath_4");
+            }
+        }
+        // show battle button
+        $("#doBattleButtonDiv").removeClass("hidden");
     }
 
+    $("#doBattleButtonDiv").click(function () {
+        $(".pos_2").addClass("attackLeft");
+        $(".puffSelected").addClass("attackRight");
+        // play smack sound
+        setTimeout(function () {
+            $("audio#smack")[0].play();
+            $(".pos_2").removeClass("attackLeft");
+            $(".puffSelected").removeClass("attackRight");
+        }, 900);
+
+    });
 
     // end //
 });

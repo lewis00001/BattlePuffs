@@ -85,7 +85,7 @@
 
         <!--- battle setup (screen 3) -->
         <div class="hidden" id="battleScreen">
-            <h2 class="h2banner">
+            <h2 class="h2banner" id="chooseOpponetBanner">
                 <div class="throb">Choose Your Opponent</div>
             </h2>
 
@@ -98,8 +98,14 @@
             <!--- enemy puffs pos_1-->
             <div class="flexbox pos_1"></div>
 
+            <!--- battle button -->
+            <div class="hidden flexbox" id="doBattleButtonDiv">
+                <div id="doBattleButton">Battle!</div>
+            </div>
+            
+
             <!--- enemy puffs pos_2-->
-            <div class="enemyPuff ePosition_2">
+            <div class="enemyPuff ePosition_2 pos_2 flexbox">
                 <div class="battleCardImage" id="activeEnemy"></div>
                 <div class="e_battleD_stats"></div>
             </div>
