@@ -193,7 +193,7 @@ $(document).ready(function () {
         }
         // find & output enemy puffs
         for (let i = 0; i < 4; i++) {
-            if (a[i].selected === false) {
+            if (a[i].selected === false && a[i].wasDestroyed === false) {
                 $(".pos_1").append(
                     "<div class='enemyPuff ePosition_1 flexbox' id='" + a[i].id + "'>" +
                     "<div class='battleCardImage'>" + a[i].image + "</div>" +
@@ -290,11 +290,12 @@ $(document).ready(function () {
             $("audio#smack")[0].play();
             $(".pos_2").removeClass("attackLeft");
             $(".puffSelected").removeClass("attackRight");
-            adjustPoints();
+            gameControl();
         }, 900);
     });
 
-    function adjustPoints() {
+    // evaluates and processes each puff status
+    function gameControl() {
         // setup variables
         let selectedPuff;
         let enemyPuff;
@@ -320,6 +321,8 @@ $(document).ready(function () {
         youLost();
         // checks for win condition
         youWon();
+        // checks active enemy status
+        activeEnemyEval();
 
         // calcuates selected puff AP increase
         function calcAP_increase() {
@@ -332,23 +335,42 @@ $(document).ready(function () {
                 return selectedPuff.attackPower;
             }
         }
-    }
-    // checks for lost condition
-    function youLost() {
-        if (selectedPuff.healthPoints <= 0) {
-            // hide battle button
-            $("#doBattleButtonDiv").addClass("hidden");
-            $(".youLost").removeClass("hidden");
-            // restarts the game over by reloading the page
-            $(".playAgain").click(function () {
-                location.reload();
-            });
+
+        // checks for lost condition
+        function youLost() {
+            if (selectedPuff.healthPoints <= 0) {
+                // hide battle button
+                $("#doBattleButtonDiv").addClass("hidden");
+                $(".youLost").removeClass("hidden");
+                // restarts the game over by reloading the page
+                $(".playAgain").click(function () {
+                    location.reload();
+                });
+            }
         }
-    }
-    // checks for win condition 
-    function youWon() {
-        if (false) {
-            console.log("you won");
+        // checks for win condition 
+        function youWon() {
+            if (false) {
+                console.log("you won");
+            }
+        }
+
+        // verifies activeEnemy status
+        function activeEnemyEval() {
+            if (enemyPuff.healthPoints <= 0) {
+                activeEnemyWasDestroyed = true;
+                enemyPuff.wasDestroyed = true;
+                // remove active enemy
+                $("#activeEnemy").html(" ");
+                $(".e_battleD_stats").html(" ");
+                // clears enemy choices
+                $(".pos_1").html(" ");
+                // hide battle button
+                $("#doBattleButtonDiv").addClass("hidden");
+                // reloads battle screen
+                battleScreen();
+                $("#chooseOpponetBanner").removeClass("hidden");
+            }
         }
     }
 
