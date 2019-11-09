@@ -186,8 +186,8 @@ $(document).ready(function () {
                 $(".puff").removeClass("d_img feefer");
                 $(".puffInfo").html(
                     "<p>" + a[i].name + "</p><br><hr>" +
-                    "<p>HP:</p><span class='statSpan'>" + a[i].healthPoints + "</span><br><br>" +
-                    "<p>AP:</p><span class='statSpan'>" + a[i].attackPower + "</span>"
+                    "<p>HP:</p><span class='statSpan' id='selHp'>" + a[i].healthPoints + "</span><br><br>" +
+                    "<p>AP:</p><span class='statSpan' id='selAp'>" + a[i].attackPower + "</span>"
                 );
             }
         }
@@ -201,7 +201,7 @@ $(document).ready(function () {
                     "<p class='statSmall'>" + a[i].name + "</p><br><hr>" +
                     "<p class='statSmall'>HP:</p><span class='statSpan statSmall'>" +
                     a[i].healthPoints + "</span><br><br>" +
-                    "<p class='statSmall'>AP:</p><span class='statSpan statSmall'>" +
+                    "<p class='statSmall'>CA:</p><span class='statSpan statSmall'>" +
                     a[i].counterAttack + "</span>" +
                     "</div>" +
                     "</div>"
@@ -256,7 +256,7 @@ $(document).ready(function () {
                 }
             }
         });
-    } 
+    }
 
     // moves selected enemy into position 
     function becomeActiveEnemy() {
@@ -269,7 +269,7 @@ $(document).ready(function () {
                 $("#activeEnemy").html(a[i].image);
                 $(".e_battleD_stats").html(
                     "<p>" + a[i].name + "</p><br><hr>" +
-                    "<p>HP:</p><span class='statSpan'>" + a[i].healthPoints + "</span><br><br>" +
+                    "<p>HP:</p><span class='statSpan' id='eneHp'>" + a[i].healthPoints + "</span><br><br>" +
                     "<p>CA:</p><span class='statSpan'>" + a[i].counterAttack + "</span>"
                 );
                 $(".puff").addClass("d_img_2");
@@ -290,13 +290,64 @@ $(document).ready(function () {
             $("audio#smack")[0].play();
             $(".pos_2").removeClass("attackLeft");
             $(".puffSelected").removeClass("attackRight");
+            adjustPoints();
         }, 900);
-
-
-
     });
 
+    function adjustPoints() {
+        // setup variables
+        let selectedPuff;
+        let enemyPuff;
+        // find battling puffs
+        for (let i = 0; i < 4; i++) {
+            if (a[i].selected === true) {
+                selectedPuff = a[i];
+            }
+            if (a[i].activeEnemy === true && a[i].wasDestroyed === false) {
+                enemyPuff = a[i];
+            }
+        }
+        // adjust stats
+        selectedPuff.healthPoints -= enemyPuff.counterAttack;
+        enemyPuff.healthPoints -= selectedPuff.attackPower;
+        selectedPuff.attackPower = calcAP_increase();
+        // update UI with adjusted stats
+        $("#selHp").html(selectedPuff.healthPoints);
+        $("#selAp").html(selectedPuff.attackPower);
+        $("#eneHp").html(enemyPuff.healthPoints);
 
+        // checks for lost condition
+        youLost();
+        // checks for win condition
+        youWon();
+
+        // calcuates selected puff AP increase
+        function calcAP_increase() {
+            // departed from what was outlined in the homework
+            // for better game play
+            if (selectedPuff.attackPower <= 100) {
+                selectedPuff.attackPower += Math.floor(selectedPuff.attackPower * 0.4);
+                return selectedPuff.attackPower;
+            } else {
+                return selectedPuff.attackPower;
+            }
+        }
+
+        // checks for lost condition
+        function youLost() {
+            if (selectedPuff.healthPoints <= 0) {
+                // hide battle button
+                $("#doBattleButtonDiv").addClass("hidden");
+                console.log("you lost");
+            }
+        }
+        // checks for win condition 
+        function youWon() {
+            if (false) {
+                console.log("you won");
+            }
+        }
+    }
 
     // end //
 });
