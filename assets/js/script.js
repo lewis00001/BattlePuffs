@@ -210,6 +210,7 @@ $(document).ready(function () {
                     "</div>"
                 );
                 $(".puff").addClass("puffSize_2 d_img_2");
+                $("#chooseOpponetBanner").removeClass("hidden");
                 $(".puff").removeClass("feefer breath_1 breath_2 breath_3 breath_4");
             }
         }
@@ -320,13 +321,6 @@ $(document).ready(function () {
         $("#selAp").html(selectedPuff.attackPower);
         $("#eneHp").html(enemyPuff.healthPoints);
 
-        // checks for lost condition
-        youLost();
-        // checks active enemy status
-        activeEnemyEval();
-        // checks to see if all puffs are dead
-        noneSurvived();
-
         // calcuates selected puff AP increase
         function calcAP_increase() {
             // departed from what was outlined in the homework
@@ -339,24 +333,26 @@ $(document).ready(function () {
             }
         }
 
-        // checks for lost condition
+        // lost condition
         function youLost() {
-            if (selectedPuff.healthPoints <= 0) {
-                // hide / show
-                $("#doBattleButtonDiv").addClass("hidden");
-                $(".pos_1").addClass("hidden");
-                $("#chooseOpponetBanner").addClass("hidden");
-                $(".youLost").removeClass("hidden");
-                // restarts the game over by reloading the page
-                $(".playAgain").click(function () {
-                    location.reload();
-                });
-            }
+            // lost sound
+            $("audio#youLostMp3")[0].play();
+            // hide / show
+            $("#doBattleButtonDiv").addClass("hidden");
+            $(".pos_1").addClass("hidden");
+            $("#chooseOpponetBanner").addClass("hidden");
+            $(".youLost").removeClass("hidden");
+            // restarts the game over by reloading the page
+            $(".playAgain").click(function () {
+                location.reload();
+            });
         }
 
         // checks for win condition 
         function youWon() {
             if (countWins === 3) {
+                // win sound
+                $("audio#youWonMp3")[0].play();
                 // hide battle button
                 $("#doBattleButtonDiv").addClass("hidden");
                 // hides choose opponet banner
@@ -369,13 +365,18 @@ $(document).ready(function () {
             };
         }
 
-        // checks to see if there were no survivors
+        // if there were no survivors
         function noneSurvived() {
-            if (countWins === 3 && selectedPuff.healthPoints <= 0) {
-                $(".youWon").addClass("hidden");
-                $(".youLost").addClass("hidden");
-                $(".noneSurvived").removeClass("hidden");
-            }
+            // play sound
+            $("audio#youTiedMp3")[0].play();
+            // add / remove classes
+            $(".youWon").addClass("hidden");
+            $(".youLost").addClass("hidden");
+            $(".noneSurvived").removeClass("hidden");
+            // restarts the game over by reloading the page
+            $(".playAgain").click(function () {
+                location.reload();
+            });
         }
 
         // verifies activeEnemy status
@@ -393,8 +394,20 @@ $(document).ready(function () {
                 $("#doBattleButtonDiv").addClass("hidden");
                 // reloads battle screen
                 battleScreen();
-                $("#chooseOpponetBanner").removeClass("hidden");
             }
+        }
+
+        // checks active enemy status
+        activeEnemyEval();
+
+        // check game conditions
+        if (countWins === 3 && selectedPuff.healthPoints <= 0) {
+            // checks to see if all puffs are dead
+            noneSurvived();
+        } else if (selectedPuff.healthPoints <= 0) {
+            // checks for lost condition
+            youLost();
+        } else {
             // checks for win condition
             youWon();
         }
