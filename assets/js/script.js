@@ -51,6 +51,9 @@ $(document).ready(function () {
     // used with battle screen
     let activeEnemyWasDestroyed = true;
 
+    // puff object shortcut
+    let a = [puffs.p1, puffs.p2, puffs.p3, puffs.p4];
+
     // selects and displays random background image for the .content section
     var images = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg'];
     $('.bg').css({
@@ -123,7 +126,6 @@ $(document).ready(function () {
     // displays the name and stats of the puffs
     function displayDestroyerSelections() {
 
-        let a = [puffs.p1, puffs.p2, puffs.p3, puffs.p4];
         let c = ["#card_1", "#card_2", "#card_3", "#card_4"];
         let ci = ["#cardImg_1", "#cardImg_2", "#cardImg_3", "#cardImg_4", ]
         let sc = ["#statsCard_1", "#statsCard_2", "#statsCard_3", "#statsCard_4"];
@@ -177,7 +179,6 @@ $(document).ready(function () {
         // unhide battleScreen
         $("#battleScreen").removeClass("hidden");
 
-        let a = [puffs.p1, puffs.p2, puffs.p3, puffs.p4];
         // find & output selected puff
         for (let i = 0; i < 4; i++) {
             if (a[i].selected === true) {
@@ -255,14 +256,13 @@ $(document).ready(function () {
                 }
             }
         });
-    }
+    } 
 
     // moves selected enemy into position 
     function becomeActiveEnemy() {
         activeEnemyWasDestroyed = false;
         $("#chooseOpponetBanner").addClass("hidden");
 
-        let a = [puffs.p1, puffs.p2, puffs.p3, puffs.p4];
         // find & output selected enemy puff
         for (let i = 0; i < 4; i++) {
             if (a[i].activeEnemy === true && a[i].wasDestroyed === false) {
@@ -270,7 +270,7 @@ $(document).ready(function () {
                 $(".e_battleD_stats").html(
                     "<p>" + a[i].name + "</p><br><hr>" +
                     "<p>HP:</p><span class='statSpan'>" + a[i].healthPoints + "</span><br><br>" +
-                    "<p>AP:</p><span class='statSpan'>" + a[i].counterAttack + "</span>"
+                    "<p>CA:</p><span class='statSpan'>" + a[i].counterAttack + "</span>"
                 );
                 $(".puff").addClass("d_img_2");
                 $(".puff").removeClass("breath_1 breath_2 breath_3 breath_4");
@@ -280,17 +280,23 @@ $(document).ready(function () {
         $("#doBattleButtonDiv").removeClass("hidden");
     }
 
+    // doBattle button functionality
     $("#doBattleButtonDiv").click(function () {
         $(".pos_2").addClass("attackLeft");
         $(".puffSelected").addClass("attackRight");
         // play smack sound
+        // play sound time kicks in just before the animation is complete
         setTimeout(function () {
             $("audio#smack")[0].play();
             $(".pos_2").removeClass("attackLeft");
             $(".puffSelected").removeClass("attackRight");
         }, 900);
 
+
+
     });
+
+
 
     // end //
 });
