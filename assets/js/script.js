@@ -51,6 +51,9 @@ $(document).ready(function () {
     // used with battle screen
     let activeEnemyWasDestroyed = true;
 
+    // used for activeEnemyEval() and youWon() below
+    let countWins = 0;
+
     // puff object shortcut
     let a = [puffs.p1, puffs.p2, puffs.p3, puffs.p4];
 
@@ -319,10 +322,10 @@ $(document).ready(function () {
 
         // checks for lost condition
         youLost();
-        // checks for win condition
-        youWon();
         // checks active enemy status
         activeEnemyEval();
+        // checks to see if all puffs are dead
+        noneSurvived();
 
         // calcuates selected puff AP increase
         function calcAP_increase() {
@@ -339,8 +342,10 @@ $(document).ready(function () {
         // checks for lost condition
         function youLost() {
             if (selectedPuff.healthPoints <= 0) {
-                // hide battle button
+                // hide / show
                 $("#doBattleButtonDiv").addClass("hidden");
+                $(".pos_1").addClass("hidden");
+                $("#chooseOpponetBanner").addClass("hidden");
                 $(".youLost").removeClass("hidden");
                 // restarts the game over by reloading the page
                 $(".playAgain").click(function () {
@@ -348,10 +353,28 @@ $(document).ready(function () {
                 });
             }
         }
+
         // checks for win condition 
         function youWon() {
-            if (false) {
-                console.log("you won");
+            if (countWins === 3) {
+                // hide battle button
+                $("#doBattleButtonDiv").addClass("hidden");
+                // hides choose opponet banner
+                $("#chooseOpponetBanner").addClass("hidden");
+                $(".youWon").removeClass("hidden");
+                // restarts the game over by reloading the page
+                $(".playAgain").click(function () {
+                    location.reload();
+                });
+            };
+        }
+
+        // checks to see if there were no survivors
+        function noneSurvived() {
+            if (countWins === 3 && selectedPuff.healthPoints <= 0) {
+                $(".youWon").addClass("hidden");
+                $(".youLost").addClass("hidden");
+                $(".noneSurvived").removeClass("hidden");
             }
         }
 
@@ -360,6 +383,7 @@ $(document).ready(function () {
             if (enemyPuff.healthPoints <= 0) {
                 activeEnemyWasDestroyed = true;
                 enemyPuff.wasDestroyed = true;
+                countWins++;
                 // remove active enemy
                 $("#activeEnemy").html(" ");
                 $(".e_battleD_stats").html(" ");
@@ -371,6 +395,8 @@ $(document).ready(function () {
                 battleScreen();
                 $("#chooseOpponetBanner").removeClass("hidden");
             }
+            // checks for win condition
+            youWon();
         }
     }
 

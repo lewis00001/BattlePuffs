@@ -298,9 +298,9 @@ h3 {
 
 .gameOver {
     width: 100%;
-    height: 350px;
+    height: 490px;
     background-color: rgb(25, 25, 25, 0.9);
-    padding: 40px;
+    padding: 60px;
 }
 
 .playAgain {
