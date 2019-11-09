@@ -296,6 +296,25 @@ h3 {
     }
 }
 
+.gameOver {
+    width: 100%;
+    height: 350px;
+    background-color: rgb(25, 25, 25, 0.9);
+    padding: 40px;
+}
+
+.playAgain {
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid white;
+    text-align: center;
+    width: 100px;
+    color: white;
+    margin: auto;
+    display: block;
+    cursor: pointer;
+}
+
 #pSelected > img {
     opacity: 1;
     width: 170px;

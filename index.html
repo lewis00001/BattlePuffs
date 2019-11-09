@@ -102,19 +102,27 @@
             <div class="hidden flexbox" id="doBattleButtonDiv">
                 <div id="doBattleButton">Battle!</div>
             </div>
-            
+
             <!--- enemy puffs pos_2-->
             <div class="enemyPuff ePosition_2 pos_2 flexbox">
                 <div class="battleCardImage" id="activeEnemy"></div>
                 <div class="e_battleD_stats"></div>
             </div>
 
-            <!--- you lost screen -->
-            <div class="youLost"></div>
+        </div>
 
-            <!--- you won screen -->
-            <div class="youWon"></div>
+        <!--- you lost screen -->
+        <div class="youLost gameOver hidden">
+            <h1>Sorry, You Lost</h1>
+            <br>
+            <div class="throb playAgain">Play Again</div>
+        </div>
 
+        <!--- you won screen -->
+        <div class="youWon gameOver hidden">
+            <h1>Awesome, You Won!</h1>
+            <br>
+            <div class="throb playAgain">Play Again</div>
         </div>
 
         <footer>

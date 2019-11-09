@@ -332,20 +332,23 @@ $(document).ready(function () {
                 return selectedPuff.attackPower;
             }
         }
-
-        // checks for lost condition
-        function youLost() {
-            if (selectedPuff.healthPoints <= 0) {
-                // hide battle button
-                $("#doBattleButtonDiv").addClass("hidden");
-                console.log("you lost");
-            }
+    }
+    // checks for lost condition
+    function youLost() {
+        if (selectedPuff.healthPoints <= 0) {
+            // hide battle button
+            $("#doBattleButtonDiv").addClass("hidden");
+            $(".youLost").removeClass("hidden");
+            // restarts the game over by reloading the page
+            $(".playAgain").click(function () {
+                location.reload();
+            });
         }
-        // checks for win condition 
-        function youWon() {
-            if (false) {
-                console.log("you won");
-            }
+    }
+    // checks for win condition 
+    function youWon() {
+        if (false) {
+            console.log("you won");
         }
     }
 
