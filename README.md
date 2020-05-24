@@ -4,7 +4,7 @@ Battle Puffs features four cute puffs, from which the player selects one to batt
 ## Hosted Site
 https://lewis00001.github.io/BattlePuffs/
 
-## Screenshot
+## Screenshots
 
 ![game ui](assets/images/battlePuffs1.png)
 ![game ui](assets/images/battlePuffs2.png)
